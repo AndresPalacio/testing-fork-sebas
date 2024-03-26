@@ -1,0 +1,63 @@
+
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.0.30'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
+}
+
+ext {
+    SERENITY = "4.0.30"
+    APPIUM = "9.0.0"
+}
+
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+group = 'serenity.template.java'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri('https://plugins.gradle.org/m2/')
+    }
+}
+
+dependencies {
+    implementation "io.appium:java-client:${APPIUM}"
+    implementation "net.serenity-bdd:serenity-screenplay:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-core:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-junit:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-cucumber:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-rest-assured:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-ensure:${SERENITY}"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:${SERENITY}"
+    implementation "com.googlecode.json-simple:json-simple:1.1.1"
+    implementation "org.apache.poi:poi-ooxml:5.2.4"
+    implementation "com.jayway.jsonpath:json-path:2.9.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+    implementation "de.vandermeer:asciitable:0.3.2"
+    implementation "io.github.bonigarcia:webdrivermanager:5.6.2"
+    implementation "org.slf4j:slf4j-simple:2.0.9"
+}
+
+idea {
+    project {
+        jdkName = "17"
+        languageLevel = "17"
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+serenity {
+    testRoot = 'serenity-template-java'
+    requirementsBaseDir = 'src/test/resources/features'
+}
+
+gradle.startParameter.continueOnFailure = true
